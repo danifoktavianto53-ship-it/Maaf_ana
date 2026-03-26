@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Ana Tersayang</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Satisfy&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Background Hati Melayang */
+        .bg-circles {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .bg-circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px; height: 20px;
+            background: rgba(255, 105, 180, 0.2);
+            animation: animateCircle 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+        .bg-circles li::after { content: '❤️'; font-size: 15px; display: flex; justify-content: center; align-items: center; height: 100%; }
+        .bg-circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .bg-circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .bg-circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .bg-circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+
+        @keyframes animateCircle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+
+        /* HALAMAN 1: TOMBOL LOVE UTAMA */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: all 0.8s ease;
+        }
+        .main-heart {
+            font-size: 100px;
+            cursor: pointer;
+            animation: heartbeat 1.2s infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 77, 109, 0.5));
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        #splash-screen p {
+            margin-top: 20px;
+            color: #ff4d6d;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        /* HALAMAN 2: KONTEN MAAF */
+        .container {
+            display: none; 
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #ffafbd;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        h1.title { font-family: 'Satisfy', cursive; color: #ff4d6d; font-size: 35px; margin-bottom: 15px; }
+        p { color: #555; font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            min-height: 50px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #btn-yes {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        #btn-no {
+            background: #eee;
+            color: #777;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* HALAMAN 3: SUKSES */
+        #success-msg {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="lagu" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <ul class="bg-circles"><li></li><li></li><li></li><li></li></ul>
+
+    <div id="splash-screen" onclick="openLetter()">
+        <div class="main-heart">💖</div>
+        <p>Klik Hati Ini, Ana!</p>
+    </div>
+
+    <div class="container" id="main-card">
+        <div id="ask-section">
+            <h1 class="title">Maafin Aku ya, Ana?</h1>
+            <p>Aku tau aku salah. Kasih aku satu kesempatan lagi buat perbaikin semuanya? Janji bakal lebih baik lagi. Sayang Ana banget! 🥺❤️</p>
+            
+            <div class="btn-group">
+                <button id="btn-yes" class="btn" onclick="sayYes()">Iya, Maafin</button>
+                <button id="btn-no" class="btn" onmouseover="moveNo()" onclick="moveNo()" ontouchstart="moveNo()">Gak Mau</button>
+            </div>
+        </div>
+
+        <div id="success-msg">
+            <h1 style="font-size: 60px;">🥰</h1>
+            <h1 class="title">Makasih Sayang!</h1>
+            <p>I Love You More! ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi Buka Surat + Putar Musik
+        function openLetter() {
+            const splash = document.getElementById('splash-screen');
+            const container = document.getElementById('main-card');
+            const musik = document.getElementById('lagu');
+
+            // Putar Musik
+            musik.play();
+
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                splash.style.display = 'none';
+                container.style.display = 'block';
+                setTimeout(() => container.style.opacity = '1', 50);
+            }, 800);
+        }
+
+        function moveNo() {
+            const btnNo = document.getElementById('btn-no');
+            btnNo.style.position = 'fixed';
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - 20);
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+
+        function sayYes() {
+            document.getElementById('ask-section').style.display = 'none';
+            document.getElementById('success-msg').style.display = 'flex';
+            document.getElementById('btn-no').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
